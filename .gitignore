@@ -1,0 +1,8 @@
+# Dependency directories
+.vscode
+assets\bower_components
+assets/bower_components
+
+# Logs
+logs
+*.log
