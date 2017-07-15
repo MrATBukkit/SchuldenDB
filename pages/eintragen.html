@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-lg-12">
+    <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Bezeichnung</th>
+                    <th>Betrag</th>
+                    <th>Wiederhoen</th>
+                    <th>Interval</th>
+                    <th>Start</th>
+                    <th>Ende</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+  </div>
+</div>
+
+<div class="row">
+    <form id="schuldnerForm">
+        <div class="form-group row">
+            <div class="col-md-5">
+                <label for="bezeichnung">Bezeichnung</label>
+                <input type="text" class="form-control" id="bezeichnung">
+            </div>
+            <div class="col-md-5">
+                <label for="betrag">Betrag</label>
+                <input type="number" class="form-control" id="betrag">
+            </div>
+            <div class="col-md-2">
+                <label for="wiederholen">Wiederholen</label>
+                <!--<input type="checkbox" class="form-control" >-->
+                <div class="checkbox">
+                    <label><input type="checkbox" id="wiederholen"><span>Aktivieren</span></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row" id="wiederholenContainer">
+            <div class="col-md-6">
+                <label for="interval">Wiederholungs Interval</label>
+                <select class="form-control" id="interval">
+                    <option value="1">1 Montat</option>
+                    <option value="3">3 Montat</option>
+                    <option value="6">6 Montat</option>
+                    <option value="12">12 Montat</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="start">Start Datum</label>
+                <input class="form-control" id="start" type="date">
+            </div>
+        </div>
+        <button type="submit" id="addSchuldner" class="btn btn-success">
+            Hinzufügen <span class="glyphicon glyphicon-plus"></span>
+        </button>
+    </form>
+</div>
+<script>
+    Date.prototype.toDateInputValue = (function() {
+        var local = new Date(this);
+        local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+        return local.toJSON().slice(0,10);
+    });
+    $("#wiederholenContainer").hide();
+    $('#start').val(new Date().toDateInputValue());
+    $("#wiederholen").click(function() {
+        console.log("Wiederhollen pressed: " + $(this).is(':checked'));
+        if ($(this).is(':checked')) {
+            $("div.checkbox span").text("Deaktivieren");
+            $("#wiederholenContainer").fadeIn();
+        } else {
+            $("div.checkbox span").text("Aktivieren");
+            $("#wiederholenContainer").fadeOut();
+        }
+    });
+    $("form#schuldnerForm").submit(function() {
+        console.log("Form submit");
+        event.preventDefault();
+        var url = "./vendor/schulden.php"
+        if ($("#wiederholen").is(':checked')) {
+            $.post( url, { bezeichnung: $('#bezeichnung').val(), betrag: $('#betrag').val(), interval: $( "#interval option:selected" ).val(), start: $( "#start" ).val() } );
+        } else {
+            $.post( url, { bezeichnung: $('#bezeichnung').val(), betrag: $('#betrag').val() });
+        }
+    });
+</script>

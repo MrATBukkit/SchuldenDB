@@ -19,10 +19,12 @@ USE `schuldendb`;
 -- Exportiere Struktur von Tabelle schuldendb.schulden
 CREATE TABLE IF NOT EXISTS `schulden` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bezeichnung` varchar(50) NOT NULL,
   `betrag` double NOT NULL,
-  `intervalTime` int(11) NOT NULL,
-  `startDate` date NOT NULL,
-  `endDate` date NOT NULL,
+  `intervalTime` int(11) DEFAULT NULL,
+  `startDate` date DEFAULT NULL,
+  `endDate` date DEFAULT NULL,
+  `datum` date NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -41,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `schuldner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

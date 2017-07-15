@@ -19,7 +19,7 @@
         echo "<td><button class='btn btn-danger removeSchuldner' data-db='".$zeile['id']."'><span class='glyphicon glyphicon-trash'></span></button></td>";
         echo "</tr>";
     }
-?><
+?>
 <script>
     $(".removeSchuldner").click(function() {
         var dataid = $(this).attr("data-db");
