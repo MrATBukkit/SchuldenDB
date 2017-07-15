@@ -4,28 +4,18 @@
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th></th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Ewald Hartman</td>
-                    
-                </tr>
-                <tr>
-                    <td>Florian Walzl</td>
-                </tr>
+            <tbody id="schuldner">
                 <tr>
                     <td>
-                        <div class="form-group row">
-                            <div class="col-sm-11">
-                                <input class="form-control" id="SchuldnerName" type="text">
-                            </div>
-                            <div class="col-sm-1">
-                                <button id="addSchuldner" class="btn btn-success">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </button>
-                            </div>
-                        </div>
+                        <input class="form-control" id="SchuldnerName" type="text">
+                    </td>
+                    <td>
+                        <button id="addSchuldner" class="btn btn-success">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
                     </td>
                 </tr>
             </tbody>
@@ -38,26 +28,35 @@
             $("#addSchuldner").click(function() {
                 var name = $("#SchuldnerName").val();
                 name = {"name": name};
-                console.log("Click");
                 $.ajax({
                     type: 'POST',
                     url: "./vendor/schuldner.php",
                     data: name,
                     dataType: "text",
                     success: function(data) { 
-                        console.log("Data: " + data);
                         if (data == "") {
-                            console.log("Data undefined");
                             $("#alertSuccess").fadeIn();
                             setTimeout(function() {
                                 $("#alertSuccess").fadeOut();
                             }, 7000);
+                            console.log(data);
+                            $("tbody#schuldner").before(data);
                         }
                     },
                     error: function(error) {
                         alert(error);
                     }
                 });
+            });
+            $.ajax({
+                type: 'GET',
+                url: "./vendor/schuldner.php",
+                success: function(data) { 
+                    $("#schuldner tr").before(data);
+                },
+                error: function(error) {
+                    alert(error);
+                }
             });
         </script>
   </div>
