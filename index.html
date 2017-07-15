@@ -16,27 +16,29 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Übersicht</a></li>
-                <li><a href="#">Schuldner</a></li>
-                <li><a href="#">Eintragen</a></li> 
+                <li class="active"><a href="./pages/home.html">Übersicht</a></li>
+                <li><a href="./pages/schuldner.html">Schuldner</a></li>
+                <li><a href="./pages/eintragen.html">Eintragen</a></li> 
             </ul>
-            <!--<ul class="nav navbar-nav navbar-right">  // TODO:
+            <!--<ul class="nav navbar-nav navbar-right"> TODO: 
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>-->
             </div>
         </div>
     </nav>
+    <div class="container" id="site"></div>
     <script src="./assets/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="./assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script>
         $("a").click(function() {
+            event.preventDefault();
             var link = $(this).attr("href")
             $.ajax({
                 url: link,
                 type: 'get',
-                success: function(){ 
-                    console.log('success!');
+                success: function(data){ 
+                    $("div#site").html(data);
                 },
                 error: function(){
                     alert('error!');
@@ -44,15 +46,20 @@
             });
         });
         $.ajax({
-            url: link,
+            url: "./pages/home.html",
             type: 'get',
-            success: function(){ 
-                console.log('success!');
+            success: function(data){ 
+                $("div#site").html(data);
             },
             error: function(){
                 alert('error!');
             }
         });
+        $("nav.navbar ul.nav li").click(function () {
+            console.log("click nav");
+            $("nav.navbar ul.nav li").removeClass("active");
+            $(this).addClass("active");
+        })
     </script>
 </body>
 </html>
