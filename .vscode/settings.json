@@ -1,0 +1,4 @@
+// Platzieren Sie Ihre Einstellungen in dieser Datei, um Standard- und Benutzereinstellungen zu überschreiben.
+{
+    "php.validate.executablePath" : "E:/laragon/bin/php/php-7.1.1-Win32-VC14-x86/php.exe"
+}

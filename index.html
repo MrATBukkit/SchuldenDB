@@ -1,0 +1,58 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span> 
+            </button>
+            <a class="navbar-brand" href="#">SchuldenDB</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Übersicht</a></li>
+                <li><a href="#">Schuldner</a></li>
+                <li><a href="#">Eintragen</a></li> 
+            </ul>
+            <!--<ul class="nav navbar-nav navbar-right">  // TODO:
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>-->
+            </div>
+        </div>
+    </nav>
+    <script src="./assets/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+        $("a").click(function() {
+            var link = $(this).attr("href")
+            $.ajax({
+                url: link,
+                type: 'get',
+                success: function(){ 
+                    console.log('success!');
+                },
+                error: function(){
+                    alert('error!');
+                }
+            });
+        });
+        $.ajax({
+            url: link,
+            type: 'get',
+            success: function(){ 
+                console.log('success!');
+            },
+            error: function(){
+                alert('error!');
+            }
+        });
+    </script>
+</body>
+</html>

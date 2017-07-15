@@ -1,0 +1,26 @@
+{
+  "name": "SchuldnerDB",
+  "authors": [
+    "MrATBukkit <hewalzl999@gmail.com>"
+  ],
+  "description": "Eine Online schulden Datenbank",
+  "main": "index.html",
+  "keywords": [
+    "db",
+    "money",
+    "html",
+    "php"
+  ],
+  "license": "MIT",
+  "homepage": "bukkit.at",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
