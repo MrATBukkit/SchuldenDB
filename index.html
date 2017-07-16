@@ -2,6 +2,8 @@
 <html>
 <head>
     <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bower_components/jquery-ui/themes/base/jquery-ui.min.css">
+    <link rel="stylesheet" href="./vendor/css/custom.css">
     <meta charset="UTF-8">
     <title>SchuldenDB</title>
 </head>
@@ -18,9 +20,9 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="./pages/home.html">Übersicht</a></li>
-                <li><a href="./pages/schuldner.html">Schuldner</a></li>
-                <li><a href="./pages/eintragen.html">Eintragen</a></li> 
+                <li class="active"><a class="ajax" href="./pages/home.html">Übersicht</a></li>
+                <li><a class="ajax" href="./pages/schuldner.html">Schuldner</a></li>
+                <li><a class="ajax" href="./pages/eintragen.html">Eintragen</a></li> 
             </ul>
             <!--<ul class="nav navbar-nav navbar-right"> TODO: 
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -32,8 +34,9 @@
     <div class="container" id="site"></div>
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
     <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./bower_components/jquery-ui/jquery-ui.min.js"></script>
     <script>
-        $("a").click(function() {
+        $("a.ajax").click(function() {
             event.preventDefault();
             var link = $(this).attr("href")
             $.ajax({
