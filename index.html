@@ -21,7 +21,7 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a class="ajax" href="./pages/home.html">Übersicht</a></li>
+                <li class="active"><a class="ajax" href="./pages/home.php">Übersicht</a></li>
                 <li><a class="ajax" href="./pages/schuldner.html">Schuldner</a></li>
                 <li><a class="ajax" href="./pages/eintragen.html">Eintragen</a></li> 
             </ul>
@@ -54,7 +54,7 @@
             });
         });
         $.ajax({
-            url: "./pages/home.html",
+            url: "./pages/home.php",
             type: 'get',
             success: function(data){ 
                 $("div#site").html(data);

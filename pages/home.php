@@ -1,5 +1,8 @@
+<div id="chart">
+
+</div>
 <?php
-    require_once("db.php");
+    require_once("../vendor/db.php");
     $sql = "SELECT * FROM `schulden` WHERE 1";
     $db_erg = mysqli_query($db_link, $sql) or die("Error: " . mysqli_error($db_link));
     $personSum = [];
@@ -32,15 +35,31 @@
         }
     }
     $result = [];
-    echo "[";
-    $count = 0;
-    foreach ($personSum as $key => $value) {
-        if ($count != 0) {
-            echo ", ";
-        } else {
-            $count++;
-        }
-        echo '["' . $key . '", '. $value . "]";
-    }
-    echo "]";
 ?>
+<script>
+    var chartC3 = c3.generate({
+        data: {
+            columns: <?php
+                    echo "[";
+                    $count = 0;
+                    foreach ($personSum as $key => $value) {
+                        if ($count != 0) {
+                            echo ", ";
+                        } else {
+                            $count++;
+                        }
+                        echo '["' . $key . '", '. $value . "]";
+                    }
+                    echo "]";
+            ?>,
+            type: 'bar'
+        },
+        bar: {
+            width: {
+                ratio: 0.5 // this makes bar width 50% of length between ticks
+            }
+            // or
+            //width: 100 // this makes bar width 100px
+        }
+    });
+</script>
