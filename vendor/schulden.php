@@ -25,8 +25,15 @@
         echo "<tr>";
         echo "<td>" .$zeile['bezeichnung']. "</td>";
         echo "<td>" .$zeile['betrag']. "</td>";
+        $sql = "SELECT schuldner.Name FROM schulden_schuldner, schuldner WHERE (schulden_schuldner.schuldnerId = schuldner.id) AND (schulden_schuldner.schuldenId = ".$zeile['id']." )";
+        $Namen_erg = mysqli_query($db_link, $sql) or die("Error: " . mysqli_error($db_link));
+        $betragPerson = round($zeile['betrag']/ mysqli_num_rows($Namen_erg), 2);
+        echo "<td>";
+        while ($name = mysqli_fetch_array( $Namen_erg)){
+            echo $name['Name'].": ".$betragPerson." € <br>";
+        }
+        echo "</td>";
         if ($zeile['intervalTime']) {
-            echo "<td></td>";
             echo "<td>" .$zeile['intervalTime']. "</td>";
             echo "<td>" .$zeile['startDate']. "</td>";
             echo "<td>" .$zeile['endDate']. "</td>";
@@ -34,7 +41,6 @@
             echo "<td>---</td>";
             echo "<td>---</td>";
             echo "<td>" .$zeile['datum']. "</td>";
-            echo "<td></td>";
         }
         echo "</tr>";
     }
