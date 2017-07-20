@@ -87,6 +87,7 @@
             url = "./vendor/beziehung.php";
             $.post( url, { schuldenId: schuldenId, SchuldnerIds: getSelectedSchuldner() });
         }
+        $("#outputSchuldner").html("");
     }
     $("#wiederholenContainer").hide();
     $('#start').val(new Date().toDateInputValue());
@@ -110,7 +111,7 @@
             $.post( url, { bezeichnung: $('#bezeichnung').val(), betrag: $('#betrag').val() }, function(data) {bezeichnungPost(data);});
         }
         $(this).trigger('reset')
-        $("#outputSchuldner").html("");
+        
     });
     $.get("./vendor/schulden.php", function(data) {
         $("#eintragenOutput").html(data)

@@ -45,11 +45,3 @@
         echo "</tr>";
     }
 ?>
-<script>
-    $('table').on('mouseenter', 'tr', function() {
-        $(this).popover('show');
-    });
-    $('table').on('mouseleave', 'tr', function() {
-        $(this).popover('hide');    
-    });
-</scripT>
