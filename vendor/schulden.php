@@ -23,25 +23,33 @@
     while ($zeile = mysqli_fetch_array( $db_erg))
     {
         echo "<tr>";
-        echo "<td>" .$zeile['bezeichnung']. "</td>";
-        echo "<td>" .$zeile['betrag']. "</td>";
-        $sql = "SELECT schuldner.Name FROM schulden_schuldner, schuldner WHERE (schulden_schuldner.schuldnerId = schuldner.id) AND (schulden_schuldner.schuldenId = ".$zeile['id']." )";
-        $Namen_erg = mysqli_query($db_link, $sql) or die("Error: " . mysqli_error($db_link));
-        $betragPerson = round($zeile['betrag']/ mysqli_num_rows($Namen_erg), 2);
-        echo "<td>";
-        while ($name = mysqli_fetch_array( $Namen_erg)){
-            echo $name['Name'].": ".$betragPerson." € <br>";
-        }
-        echo "</td>";
-        if ($zeile['intervalTime']) {
-            echo "<td>" .$zeile['intervalTime']. "</td>";
-            echo "<td>" .$zeile['startDate']. "</td>";
-            echo "<td>" .$zeile['endDate']. "</td>";
-        } else {
-            echo "<td>---</td>";
-            echo "<td>---</td>";
-            echo "<td>" .$zeile['datum']. "</td>";
-        }
+            echo "<td>" .$zeile['bezeichnung']. "</td>";
+            echo "<td>" .$zeile['betrag']. "</td>";
+            $sql = "SELECT schuldner.Name FROM schulden_schuldner, schuldner WHERE (schulden_schuldner.schuldnerId = schuldner.id) AND (schulden_schuldner.schuldenId = ".$zeile['id']." )";
+            $Namen_erg = mysqli_query($db_link, $sql) or die("Error: " . mysqli_error($db_link));
+            $betragPerson = round($zeile['betrag']/ mysqli_num_rows($Namen_erg), 2);
+            echo "<td>";
+            while ($name = mysqli_fetch_array( $Namen_erg)){
+                echo $name['Name'].": ".$betragPerson." € <br>";
+            }
+            echo "</td>";
+            if ($zeile['intervalTime']) {
+                echo "<td>" .$zeile['intervalTime']. "</td>";
+                echo "<td>" .$zeile['startDate']. "</td>";
+                echo "<td>" .$zeile['endDate']. "</td>";
+            } else {
+                echo "<td>---</td>";
+                echo "<td>---</td>";
+                echo "<td>" .$zeile['datum']. "</td>";
+            }
         echo "</tr>";
     }
 ?>
+<script>
+    $('table').on('mouseenter', 'tr', function() {
+        $(this).popover('show');
+    });
+    $('table').on('mouseleave', 'tr', function() {
+        $(this).popover('hide');    
+    });
+</scripT>
