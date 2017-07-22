@@ -2,17 +2,15 @@
     require_once("db.php");
     if (isset($_POST['interval'])) {
         $sql = "INSERT INTO `schulden` 
-            (`bezeichnung`, `betrag`, `intervalTime`, `startDate`)
-                VALUES ('".$_POST['bezeichnung']."', '".$_POST['betrag']."', '".$_POST['interval']."', '".$_POST['start']."')";
+            (`bezeichnung`, `betrag`, `intervalTime`, `startDate`, `zahler`)
+                VALUES ('".$_POST['bezeichnung']."', '".$_POST['betrag']."', '".$_POST['interval']."', '".$_POST['start']."', '".$_POST['zahler']."')";
             //VALUES ('".$_POST['bezeichnung']."', '".$_POST['betrag']."', '".$_POST['interval']."', '".$_POST['start']."';";
         mysqli_query($db_link, $sql) or die("Error: " . mysqli_error($db_link));
         print mysqli_insert_id($db_link);
         exit();
     }
     if (isset($_POST['bezeichnung'])) {
-        $sql = "INSERT INTO `schulden` 
-            (`bezeichnung`, `betrag`) 
-            VALUES ('".$_POST['bezeichnung']."', '".$_POST['betrag']."')";
+        $sql = "INSERT INTO `schulden` (`bezeichnung`, `betrag`, `zahler`) VALUES ('".$_POST['bezeichnung']."', '".$_POST['betrag']."', '".$_POST['zahler']."')";
         mysqli_query($db_link, $sql) or die("Error: " . mysqli_error($db_link));
         print mysqli_insert_id($db_link);
         exit();

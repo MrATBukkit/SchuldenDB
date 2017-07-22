@@ -21,11 +21,15 @@
 <div class="row margin-top-50">
     <form id="PersonenForm">
         <div class="form-group row">
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <label for="bezeichnung">Bezeichnung</label>
                 <input type="text" class="form-control" id="bezeichnung">
             </div>
-            <div class="col-md-5">
+            <div class="col-md-3">
+                <label for="zahler">Zahler</label>
+                <input type="text" class="form-control" id="zahler">
+            </div>
+            <div class="col-md-3">
                 <label for="betrag">Betrag</label>
                 <input type="number" class="form-control" step="any" id="betrag">
             </div>
@@ -106,9 +110,9 @@
         event.preventDefault();
         var url = "./vendor/schulden.php"
         if ($("#wiederholen").is(':checked')) {
-            $.post( url, { bezeichnung: $('#bezeichnung').val(), betrag: $('#betrag').val(), interval: $( "#interval option:selected" ).val(), start: $( "#start" ).val() }, function(data) {bezeichnungPost(data);});
+            $.post( url, { bezeichnung: $('#bezeichnung').val(), betrag: $('#betrag').val(), interval: $( "#interval option:selected" ).val(), start: $( "#start" ).val(), zahler: $('#zahler').val() }, function(data) {bezeichnungPost(data);});
         } else {
-            $.post( url, { bezeichnung: $('#bezeichnung').val(), betrag: $('#betrag').val() }, function(data) {bezeichnungPost(data);});
+            $.post( url, { bezeichnung: $('#bezeichnung').val(), betrag: $('#betrag').val(), zahler: $('#zahler').val() }, function(data) {bezeichnungPost(data);});
         }
         $(this).trigger('reset')
         
