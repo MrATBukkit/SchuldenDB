@@ -1,7 +1,7 @@
 <?php
     if (isset($_GET['q'])) {
         $term = trim($_GET['q']);
-        $sql = "SELECT id, Name FROM `schuldner` WHERE Name LIKE '%".$term."%'";
+        $sql = "SELECT id, Name FROM `Personen` WHERE Name LIKE '%".$term."%'";
         if (isset($_GET['not'])) {
             //$json = json_decode($_GET['not']);
             $json = $_GET['not']['data'];
@@ -14,7 +14,7 @@
             }
         }
     } else {
-        $sql = "SELECT id, Name FROM `schuldner`";
+        $sql = "SELECT id, Name FROM `Personen`";
         if (isset($_GET['not'])) {
             //$json = json_decode($_GET['not']);
             $json = $_GET['not']['data'];

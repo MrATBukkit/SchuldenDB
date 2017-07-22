@@ -8,7 +8,7 @@
     $personSum = [];
     while ($zeile = mysqli_fetch_array( $db_erg))
     {
-        $sql = "SELECT schuldner.Name FROM schulden_schuldner, schuldner WHERE (schulden_schuldner.schuldnerId = schuldner.id) AND (schulden_schuldner.schuldenId = ".$zeile['id']." )";
+        $sql = "SELECT Personen.Name FROM schulden_Personen, Personen WHERE (schulden_Personen.PersonenId = Personen.id) AND (schulden_Personen.schuldenId = ".$zeile['id']." )";
         $Namen_erg = mysqli_query($db_link, $sql) or die("Error: " . mysqli_error($db_link));
         $betragPerson = round($zeile['betrag']/ mysqli_num_rows($Namen_erg), 2);
         while ($name = mysqli_fetch_array( $Namen_erg)){

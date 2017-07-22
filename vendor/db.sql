@@ -29,17 +29,17 @@ CREATE TABLE IF NOT EXISTS `schulden` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Daten Export vom Benutzer nicht ausgewählt
--- Exportiere Struktur von Tabelle schuldendb.schulden_schuldner
-CREATE TABLE IF NOT EXISTS `schulden_schuldner` (
+-- Exportiere Struktur von Tabelle schuldendb.schulden_Personen
+CREATE TABLE IF NOT EXISTS `schulden_Personen` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `schuldenId` int(11) NOT NULL,
-  `schuldnerId` int(11) NOT NULL,
+  `PersonenId` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Daten Export vom Benutzer nicht ausgewählt
--- Exportiere Struktur von Tabelle schuldendb.schuldner
-CREATE TABLE IF NOT EXISTS `schuldner` (
+-- Exportiere Struktur von Tabelle schuldendb.Personen
+CREATE TABLE IF NOT EXISTS `Personen` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)

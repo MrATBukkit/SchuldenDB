@@ -7,13 +7,13 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody id="schuldner">
+            <tbody id="Personen">
                 <tr>
                     <td>
-                        <input class="form-control" id="SchuldnerName" type="text">
+                        <input class="form-control" id="PersonenName" type="text">
                     </td>
                     <td>
-                        <button id="addSchuldner" class="btn btn-success">
+                        <button id="addPersonen" class="btn btn-success">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                     </td>
@@ -25,12 +25,12 @@
             </div>
         <script>
             $("#alertSuccess").hide();
-            $("#addSchuldner").click(function() {
-                var name = $("#SchuldnerName").val();
+            $("#addPersonen").click(function() {
+                var name = $("#PersonenName").val();
                 name = {"name": name};
                 $.ajax({
                     type: 'POST',
-                    url: "./vendor/schuldner.php",
+                    url: "./vendor/Personen.php",
                     data: name,
                     dataType: "text",
                     success: function(data) { 
@@ -40,7 +40,7 @@
                                 $("#alertSuccess").fadeOut();
                             }, 7000);
                             console.log(data);
-                            $("tbody#schuldner").before(data);
+                            $("tbody#Personen").before(data);
                         }
                     },
                     error: function(error) {
@@ -50,9 +50,9 @@
             });
             $.ajax({
                 type: 'GET',
-                url: "./vendor/schuldner.php",
+                url: "./vendor/Personen.php",
                 success: function(data) { 
-                    $("#schuldner tr").before(data);
+                    $("#Personen tr").before(data);
                 },
                 error: function(error) {
                     alert(error);
