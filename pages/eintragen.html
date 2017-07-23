@@ -110,9 +110,9 @@
         event.preventDefault();
         var url = "./vendor/schulden.php"
         if ($("#wiederholen").is(':checked')) {
-            $.post( url, { bezeichnung: $('#bezeichnung').val(), betrag: $('#betrag').val(), interval: $( "#interval option:selected" ).val(), start: $( "#start" ).val(), zahler: $('#zahler').val() }, function(data) {bezeichnungPost(data);});
+            $.post( url, { bezeichnung: $('#bezeichnung').val(), betrag: $('#betrag').val(), interval: $( "#interval option:selected" ).val(), start: $( "#start" ).val(), zahler: $('#zahler').attr('data-id') }, function(data) {bezeichnungPost(data);});
         } else {
-            $.post( url, { bezeichnung: $('#bezeichnung').val(), betrag: $('#betrag').val(), zahler: $('#zahler').val() }, function(data) {bezeichnungPost(data);});
+            $.post( url, { bezeichnung: $('#bezeichnung').val(), betrag: $('#betrag').val(), zahler: $('#zahler').attr('data-id') }, function(data) {bezeichnungPost(data);});
         }
         $(this).trigger('reset')
         
@@ -120,7 +120,6 @@
     $.get("./vendor/schulden.php", function(data) {
         $("#eintragenOutput").html(data)
     })
-    var availableTags = [{"label":"Ewald Hartman","value":"57"},{"label":"ewaldine","value":"62"}]
     $('#Personen').autocomplete({
         delay: 500,
         minLength: 2,
@@ -147,6 +146,27 @@
                 $(this).closest("div.alert-Personen").remove();
             });
             getSelectedPersonenArray();
+        }
+    });
+    $('#zahler').autocomplete({
+        delay: 500,
+        minLength: 2,
+        source: function (request, response) {
+            $.getJSON("./vendor/search.php", {
+                q: request.term, not: getSelectedPersonenArray()
+            }, function (data) {
+                response(data);
+                //response(data);
+            });
+        }, 
+        focus: function (event, ui) {
+            event.preventDefault();
+            $("#zahler").val(ui.item.label);
+        },
+        select: function( event, ui ) {
+            event.preventDefault();
+            $(this).val(ui.item.label);
+            $(this).attr('data-id', ui.item.value);
         }
     });
 

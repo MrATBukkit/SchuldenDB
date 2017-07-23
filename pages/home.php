@@ -1,12 +1,33 @@
+<div class="col-md-6">
+    <label for="personen">Personen wählen an die geld geschuldet wird</label>
+    <select class="form-control" id="personenPicker">
+        <option value="all">Alle</option>
+        <?php
+            require_once("../vendor/db.php");
+            $sql = "SELECT personen.id, personen.Name FROM `personen`, `schulden` WHERE personen.id = schulden.zahler GROUP BY personen.id;";
+            $db_erg = mysqli_query($db_link, $sql) or die("Error: " . mysqli_error($db_link));
+            while ($zeile = mysqli_fetch_array( $db_erg)) {
+                echo "<option ";
+                if (isset($_GET['p']) && (string)$_GET['p'] == (string)$zeile['id']) {
+                    echo "selected ";
+                }
+                echo "value='".$zeile['id']."'>".$zeile['Name']."</option>";
+            }
+        ?>
+    </select>
+</div><br><br><br>
 <div id="chart">
 
 </div>
 <?php
-    require_once("../vendor/db.php");
-    $sql = "SELECT * FROM `schulden` WHERE 1";
+    if (isset($_GET['p'])) {
+        $sql = "SELECT schulden.id, schulden.betrag, personen.Name, schulden.intervalTime, schulden.endDate, schulden.startDate, schulden.datum FROM `personen`, `schulden` WHERE personen.id = schulden.zahler AND personen.id = ".$_GET['p'].";";
+    } else {
+        $sql = "SELECT * FROM `schulden` WHERE 1";
+    }
     $db_erg = mysqli_query($db_link, $sql) or die("Error: " . mysqli_error($db_link));
     $personSum = [];
-    while ($zeile = mysqli_fetch_array( $db_erg))
+    while ($zeile = mysqli_fetch_array($db_erg))
     {
         $sql = "SELECT Personen.Name FROM schulden_Personen, Personen WHERE (schulden_Personen.PersonenId = Personen.id) AND (schulden_Personen.schuldenId = ".$zeile['id']." )";
         $Namen_erg = mysqli_query($db_link, $sql) or die("Error: " . mysqli_error($db_link));
@@ -37,6 +58,31 @@
     $result = [];
 ?>
 <script>
+    $('#personenPicker').change(function() {
+        if ($('#personenPicker option:selected').val() == "all") {
+            $.ajax({
+                url: "./pages/home.php",
+                type: 'get',
+                success: function(data){ 
+                    $("div#site").html(data);
+                },
+                error: function(){
+                    alert('error!');
+                }
+            });
+            return;
+        }
+        $.ajax({
+            url: "./pages/home.php?p="+$('#personenPicker option:selected').val(),
+            type: 'get',
+            success: function(data){ 
+                $("div#site").html(data);
+            },
+            error: function(){
+                alert('error!');
+            }
+        });
+    });
     var chartC3 = c3.generate({
         data: {
             columns: <?php

@@ -1,4 +1,5 @@
 -- --------------------------------------------------------
+
 -- Host:                         localhost
 -- Server Version:               10.2.3-MariaDB-log - mariadb.org binary distribution
 -- Server Betriebssystem:        Win32
