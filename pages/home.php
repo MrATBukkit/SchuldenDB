@@ -55,7 +55,6 @@
             }
         }
     }
-    $result = [];
 ?>
 <script>
     $('#personenPicker').change(function() {
